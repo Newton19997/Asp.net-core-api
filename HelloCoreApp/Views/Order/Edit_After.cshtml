@@ -1,0 +1,172 @@
+﻿@model HelloCoreApp.Models.Order.OrderEditViewModel.EditOrderModel
+
+@{
+    ViewData["Title"] = "Edit_After";
+}
+
+<h1>Edit</h1>
+
+<h4>Order</h4>
+<hr />
+<div class="row">
+    <div class="col-md-10">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="id" />
+            <div class="form-group">
+                <label asp-for="OrderNo" class="control-label"></label>
+                <input asp-for="OrderNo" class="form-control" />
+                <span asp-validation-for="OrderNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderDate" class="control-label"></label>
+                <input asp-for="OrderDate" class="form-control" />
+                <span asp-validation-for="OrderDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CustomerId" class="control-label"></label>
+                <select asp-for="CustomerId" class="form-control" asp-items="Model.Customers"></select>
+                <span asp-validation-for="CustomerId" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <h3>Order Delails</h3>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group">
+                        <label for="productId" class="control-label">Product</label>
+                        <select id="productId" name="productId" asp-items="Model.ProductSelectItem" class="form-control">
+                            <option>Select Product.........</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="UnitPrice" class="control-label">UnitPrice</label>
+                        <input type="number" name="UnitPrice" id="UnitPrice" class="form-control" />
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    
+                    <div class="form-group">
+                        <label for="Qty" class="control-label">Qty</label>
+                        <input type="number" name="Qty" id="Qty" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="DiscountPercentage" class="control-label">DiscountPercentage</label>
+                        <input type="text" name="DiscountPercentage" id="DiscountPercentage" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <input type="button" id="AddButton" value="Add" class="btn btn-primary" />
+                        <input type="button" id="EditButton" onclick="editHtmlTableSelectRow()" value="Edit" class="btn btn-dark" />
+                        <input type="button" id="RemovedButton" value="Removed" onclick="removedSelectRow()" class="btn btn-danger" />
+
+                    </div>
+                </div>
+            </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        
+                        @*<th>
+                                 Id
+                                   @Html.DisplayNameFor(model => model.Id)
+                            </th>*@
+                        <th>
+                            Product
+                            @*@Html.DisplayNameFor(model => model.OrderDetails.)*@
+                        </th>
+                        <th>
+                            Qty
+                            @*@Html.DisplayNameFor(model => model.Address)*@
+                        </th>
+                        <th>
+                            UnitPrice
+                            @*@Html.DisplayNameFor(model => model.Address)*@
+                        </th>
+                        <th>
+                            DiscountPercentage
+                            @*@Html.DisplayNameFor(model => model.Address)*@
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="tbEditOrderDetails">
+                   
+                    @foreach (var item in Model.OrderDetails)
+                    {
+
+                        @*<tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Id)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Qty)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UnitPrice)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DiscountPercentage)
+                                </td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                </td>
+                            </tr>*@
+
+                        <tr>
+                            
+                            <td>
+                                <input type="hidden" id="tbProductId" name="OrderDetails[@Html.DisplayFor(modelItem => item.Id)].@Html.DisplayFor(modelItem => item.ProductId)" value="@Html.DisplayFor(modelItem => item.ProductId)" />@Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                <input type="hidden" id="tbQty" name="OrderDetails[@Html.DisplayFor(modelItem => item.Id)].@Html.DisplayFor(modelItem => item.Qty)" value="@Html.DisplayFor(modelItem => item.Qty)" /> @Html.DisplayFor(modelItem => item.Qty)
+                            </td>
+                            <td>
+                                <input type="hidden" id="tbUnitPrice" name="OrderDetails[@Html.DisplayFor(modelItem => item.Id)].@Html.DisplayFor(modelItem => item.UnitPrice)" value="@Html.DisplayFor(modelItem => item.UnitPrice)" />  @Html.DisplayFor(modelItem => item.UnitPrice)
+                            </td>
+                            <td>
+                                <input type="hidden" id="tbDiscountPercentage" name="OrderDetails[@Html.DisplayFor(modelItem => item.Id)].@Html.DisplayFor(modelItem => item.DiscountPercentage)" value="@Html.DisplayFor(modelItem => item.DiscountPercentage)" />@Html.DisplayFor(modelItem => item.DiscountPercentage)
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+
+            @*<div class="row">
+                    <table class="table table-striped table-bordered table-hover table-responsive-md">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Qty</th>
+                                <th>Unit Price</th>
+                                <th>Discount Percent</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbOrderDetails"></tbody>
+                    </table>
+                </div>*@
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts{
+    <script src="~/Scripts/AddScripts/Order/JavaScript.js"></script>
+}

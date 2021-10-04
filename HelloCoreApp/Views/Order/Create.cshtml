@@ -1,0 +1,97 @@
+﻿@model HelloCoreApp.Models.Order.OrderViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>OrderViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="OrderNo" class="control-label"></label>
+                <input asp-for="OrderNo" class="form-control" />
+                <span asp-validation-for="OrderNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderDate" class="control-label"></label>
+                <input asp-for="OrderDate" class="form-control" />
+                <span asp-validation-for="OrderDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="CustomerId" class="control-label">Customer</label>
+                @*<input asp-for="CustomerId" asp-items= class="form-control" />*@
+                <select id="CustomerId" name="CustomerId" asp-items="Model.Customers" class="form-control">
+                    <option>Select Customer.........</option>
+                </select>
+                
+            </div>
+            <div class="row">
+                <h3>Order Delails</h3>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="productId" class="control-label">Product</label>
+                        <select id="productId" name="productId" asp-items="Model.ProductSelectItem" class="form-control">
+                            <option>Select Product.........</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="UnitPrice" class="control-label">UnitPrice</label>
+                        <input type="number" id="UnitPrice" class="form-control" />
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Qty" class="control-label">Qty</label>
+                        <input type="number" id="Qty" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="DiscountPercentage" class="control-label">DiscountPercentage</label>
+                        <input type="text" id="DiscountPercentage" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <input type="button" id="AddButton" value="Add" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <table class="table table-striped table-bordered table-hover table-responsive-md">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Qty</th>
+                            <th>Unit Price</th>
+                            <th>Discount Percent</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbOrderDetails"></tbody>
+                </table>
+            </div>
+            <div class="form-group">
+                
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts{
+    <script src="~/Scripts/AddScripts/Order/OrderDetailsScript.js"></script>
+}

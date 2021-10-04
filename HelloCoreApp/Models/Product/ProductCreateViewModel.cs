@@ -1,0 +1,26 @@
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Modelss;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
+using HelloCoreApp.Models;
+
+
+namespace HelloCoreApp.Models.Product
+{
+    public class ProductCreateViewModel
+    {
+        public string Name { get; set; }
+        public double Price { get; set; }
+        public string Description { get; set; }
+        public bool IsActive { get; set; }
+        [Display(Name = "Category")]
+        public int? CategoryId { get; set; }
+        //public List<Shop> Shops{ get; set; }
+        //public List<OrderDetail> Orders { get; set; }   
+        public List<SelectListItem> listofCategory { get; set; }
+        public ICollection<global::Modelss.Product> productsList { get; set; }
+    }
+}

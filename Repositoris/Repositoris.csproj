@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="CategoryRepository.cs" />
+    <Compile Remove="Contacts\ICategoryRepository.cs" />
+    <Compile Remove="Contacts\IOrderdetailsRepository.cs" />
+    <Compile Remove="Contacts\IOrderRepository.cs" />
+    <Compile Remove="Contacts\IProductRepository.cs" />
+    <Compile Remove="Contacts\IShopRepository.cs" />
+    <Compile Remove="OrderdetailsRepository.cs" />
+    <Compile Remove="OrderRepository.cs" />
+    <Compile Remove="ProductRepository.cs" />
+    <Compile Remove="ShopRepository.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DatabaseContext\DatabaseContext.csproj" />
+    <ProjectReference Include="..\Modelss\Modelss.csproj" />
+  </ItemGroup>
+
+</Project>

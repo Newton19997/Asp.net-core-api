@@ -1,0 +1,6 @@
+﻿Model wise data base create code
+1 add-migration 
+new column add in model
+1 add migration
+2 update-database
+3.remove-migration
